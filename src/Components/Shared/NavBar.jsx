@@ -54,6 +54,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="avatar navbar-end">
+                <button className='btn btn-primary'>Login</button>
 
             </div>
         </div>

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProviders';
 
 const NavBar = () => {
     const [activeLink, setActiveLink] = useState('')
     const [isOpen, setIsOpen] = useState(false);
+    const { user, logOut } = useContext(AuthContext)
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -11,6 +13,14 @@ const NavBar = () => {
 
     const handleClick = (link) => {
         setActiveLink(link)
+    }
+
+    const handleLogOut = () => {
+        logOut()
+            .then()
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     const options = <>
@@ -54,9 +64,25 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="avatar navbar-end">
-                <Link to="/login">
-                    <button className='btn btn-primary'>Login</button>
-                </Link>
+                {
+                    user ?
+                        <div className='flex flex-col-reverse'>
+                            <div>
+                                <button onClick={handleLogOut} className='btn btn-primary'>LogOut</button>
+                            </div>
+                            <div className="w-16 rounded-full">
+                                <img src={user?.photoURL} title={user?.displayName} />
+                            </div>
+                        </div>
+                        :
+                        <Link to="/login">
+                            <button className='btn btn-primary'>Login</button>
+                        </Link>
+
+
+                }
+
+
 
             </div>
         </div>

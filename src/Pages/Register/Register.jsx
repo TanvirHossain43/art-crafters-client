@@ -6,13 +6,15 @@ import Swal from 'sweetalert2';
 
 
 const Register = () => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } ,watch} = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext)
 
     const navigate = useNavigate()
+    const password = watch("password");
+    const confirmPassword = watch("confirmPassword");
 
     const onSubmit = data => {
-        console.log(data)
+
         createUser(data.email, data.password)
             .then(result => {
                 const createUser = result.user;
@@ -83,9 +85,22 @@ const Register = () => {
 
                             {errors.password?.type === 'pattern' && <p role="alert" className="text-red-500">password must have one capital letter,one special character & atleast one small letter</p>}
 
+                        </div>
+                        <div className='form-control'>
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <span className="label-text">Confirm Password</span>
                             </label>
+                            <input
+                                type="password"
+                                placeholder="confirm password"
+                                className="input input-bordered"
+                                name="confirmPassword"
+                                {...register("confirmPassword", {
+                                    required: true,
+                                    validate: (value) => value === password
+                                })}
+                            />
+                            {errors.confirmPassword && <span>Passwords do not match</span>}
                         </div>
                         <div className="form-control mt-6">
 

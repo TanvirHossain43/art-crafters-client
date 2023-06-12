@@ -44,7 +44,7 @@ const NavBar = () => {
 
     return (
 
-        <div className="navbar bg-opacity-40 bg-black text-white max-w-screen-xl rounded-lg mx-auto">
+        <div className="navbar bg-opacity-40 bg-black text-white  rounded-lg mx-auto fixed z-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden" onClick={toggleMenu}>
@@ -63,15 +63,15 @@ const NavBar = () => {
                     {options}
                 </ul>
             </div>
-            <div className="avatar navbar-end">
+            <div className=" navbar-end">
                 {
                     user ?
-                        <div className='flex flex-col-reverse'>
+                        <div className='flex items-center gap-x-3'>
                             <div>
                                 <button onClick={handleLogOut} className='btn btn-primary'>LogOut</button>
                             </div>
-                            <div className="w-16 rounded-full">
-                                <img src={user?.photoURL} title={user?.displayName} />
+                            <div className="w-16">
+                                <img className='w-14 rounded-full' src={user?.photoURL} title={user?.displayName} />
                             </div>
                         </div>
                         :

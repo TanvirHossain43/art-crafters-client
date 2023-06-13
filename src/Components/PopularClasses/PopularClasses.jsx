@@ -11,7 +11,7 @@ const PopularClasses = () => {
     return (
         <div className='mt-20 mb-20'>
 
-            <div className='w-1/4 mb-10 mx-auto'>
+            <div className='w-2/4 mb-10 mx-auto'>
                 <hr  className='border-dotted border-2 border-indigo-600 '/>
                 <h2 className='text-5xl text-center mb-3'>Popular Classes</h2>
                 <hr className='border-dotted border-2 border-indigo-600 '/>
@@ -21,7 +21,7 @@ const PopularClasses = () => {
                     popularClasses.map(classes => (
                         <div className="card card-compact w-96 bg-base-100 shadow-xl" key={classes._id}>
                             <figure>
-                                <img className='h-64' src={classes.image} alt="Shoes" />
+                                <img className='h-64' src={classes.image} alt="" />
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">{classes.name}</h2>

@@ -1,15 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-const PopularInstructors = () => {
+const Instructors = () => {
     const [instructors, setInstructors] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/instructors/popular')
+        axios.get('http://localhost:5000/instructors')
             .then(response => setInstructors(response.data))
             .catch(error => console.error('Error:', error));
     }, [])
     return (
-        <div className='mt-20 mb-20'>
+        <div className='pt-20 mb-20'>
 
             <div className='w-2/4 mb-10 mx-auto'>
                 <hr className='border-dotted border-2 border-indigo-600 ' />
@@ -25,7 +25,7 @@ const PopularInstructors = () => {
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">{instructor.name}</h2>
-                              
+                                <p> Email:{instructor.email}</p>
                                 
 
                             </div>
@@ -38,4 +38,4 @@ const PopularInstructors = () => {
     );
 };
 
-export default PopularInstructors;
+export default Instructors;

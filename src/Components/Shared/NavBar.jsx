@@ -31,13 +31,13 @@ const NavBar = () => {
                 Home
             </Link>
         </li>
-        {/* 
+        
         <li className='text-lg font-semibold ml-2'>
-            <Link to="/addtask" className={` ${activeLink === 'addtask' ? 'text-blue-800 text-xl ' : ''
+            <Link to="/instructors" className={` ${activeLink === 'instructors' ? 'text-blue-800 text-xl ' : ''
                 }`}
-                onClick={() => handleClick('addtask')}>
-                Add Task</Link>
-        </li> */}
+                onClick={() => handleClick('instructors')}>
+                Instructors</Link>
+        </li>
 
     </>
 

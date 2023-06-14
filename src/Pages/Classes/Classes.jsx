@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
+import { QueryClient, useQueryClient } from 'react-query';
 
 const Classes = () => {
     const { user } = useContext(AuthContext)
     const [classes, setClasses] = useState([])
+    const queryClient = useQueryClient();
     useEffect(() => {
         fetch('http://localhost:5000/classes')
             .then(res => res.json())
@@ -17,7 +19,9 @@ const Classes = () => {
         if (!user) {
             alert('You have to log in first');
             return;
-        } else {
+        }
+
+        else {
             const proceed = confirm('Are you sure to add the class');
             if (proceed) {
                 fetch(`http://localhost:5000/classes/${id}`, {
@@ -25,16 +29,27 @@ const Classes = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ incrementStudents: true, decrementSeats: true }),
+                    body: JSON.stringify({ incrementStudents: true }),
                 })
                     .then((res) => res.json())
                     .then((data) => {
                         if (data.modifiedCount > 0) {
                             Swal.fire('Data updated successfully!', 'Good Job!', 'success')
-                                .then(() => {
-                                    // Refetch the classes data to update the student count and available seats
-                                    queryClient.invalidateQueries('classes');
-                                });
+                            // Find the class by ID in the current classes state
+                            const updatedClasses = classes.map((classItem) => {
+                                if (classItem._id === id) {
+                                    // Update availableSeats and students properties
+                                    return {
+                                        ...classItem,
+                                        availableSeats: classItem.availableSeats - 1,
+                                        students: classItem.students + 1,
+                                    };
+                                }
+                                return classItem;
+                            });
+
+                            // Update the classes state with the modified class data
+                            setClasses(updatedClasses);
                         } else {
                             alert('Nothing has changed');
                         }

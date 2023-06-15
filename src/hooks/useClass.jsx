@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProviders';
 import { useQuery } from 'react-query';
+import useSecureAxious from './useSecureAxious';
+import useAuth from './useAuth';
 
 const useClass = () => {
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth();
 
     const token = localStorage.getItem('access-token')
+    const [axiosSecure] = useSecureAxious();
 
     const { refetch, data: selectedClass = [] } = useQuery({
 
@@ -13,11 +16,7 @@ const useClass = () => {
 
         queryFn: async () => {
 
-            const response = await fetch(`http://localhost:5000/selectedClass?email=${user.email}`, {
-                headers: {
-                    authorization: `bearer ${token}`
-                }
-            })
+            const response = await axiosSecure(`/selectedClass?email=${user.email}`)
             return response.json()
         }
     })

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Providers/AuthProviders';
+import { useQuery } from 'react-query';
 
 const useClass = () => {
     const { user } = useContext(AuthContext)

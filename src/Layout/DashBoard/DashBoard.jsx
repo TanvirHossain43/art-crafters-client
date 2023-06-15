@@ -31,7 +31,7 @@ const DashBoard = () => {
                         ) : isInstructor ? (
                             <>
                                 <li><Link to="/dashboard/addclass">Add a Class</Link></li>
-                                <li><Link to="/dashboard/allusers">My Classes</Link></li>
+                                <li><Link to="/dashboard/myclasses">My Classes</Link></li>
                             </>
                         ) : (
                             <>

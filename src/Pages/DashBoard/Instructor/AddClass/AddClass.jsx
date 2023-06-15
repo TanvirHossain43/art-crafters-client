@@ -22,7 +22,8 @@ const AddClass = () => {
             instructor:instructorName,
             instructorEmail:instructorEmail,
             availableSeats:availableSeats,
-            price:price
+            price:price,
+            students:0
         }
         console.log(newClass)
         fetch('http://localhost:5000/classes', {

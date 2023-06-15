@@ -44,6 +44,12 @@ const NavBar = () => {
                 onClick={() => handleClick('classes')}>
                 Classes</Link>
         </li>
+        <li className='text-lg font-semibold ml-2'>
+            <Link to="/dashboard" className={` ${activeLink === 'dashboard' ? 'text-blue-800 text-xl ' : ''
+                }`}
+                onClick={() => handleClick('dashboard')}>
+                DashBoard</Link>
+        </li>
 
     </>
 

@@ -64,7 +64,7 @@ const AllUsers = () => {
                                         value={user.role} // Set the initial selected value based on user's current role
                                         onChange={(event) => handleRoleChange(event, user._id)}
                                     >
-                                        <option disabled value="">
+                                        <option disabled selected value="">
                                             Select role
                                         </option>
                                         <option value="admin">Admin</option>

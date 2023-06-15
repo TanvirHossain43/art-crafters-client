@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import useAdmin from '../../hooks/useAdmin';
+import useInstructor from '../../hooks/useInstructor';
 
 const DashBoard = () => {
 
     // TODO : load data from the server to have dynamic isAdmin based on Data
     // const isAdmin = true;
-    const [isAdmin]= useAdmin()
+    const [isAdmin] = useAdmin()
+    const [isInstructor] = useInstructor();
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -21,15 +23,22 @@ const DashBoard = () => {
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     {
-                        isAdmin ? <>
-                            <li><Link to="/">Manage Classes</Link></li>
-                            <li><Link to="/dashboard/allusers">Manage Users</Link></li>
-                        </>
-                            :
+                        isAdmin ? (
+                            <>
+                                <li><Link to="/">Manage Classes</Link></li>
+                                <li><Link to="/dashboard/allusers">Manage Users</Link></li>
+                            </>
+                        ) : isInstructor ? (
+                            <>
+                                <li><Link to="/dashboard/addclass">Add a Class</Link></li>
+                                <li><Link to="/dashboard/allusers">My Classes</Link></li>
+                            </>
+                        ) : (
                             <>
                                 <li><Link to="/dashboard/myselectedclasses">My Selected Classes</Link></li>
                                 <li><Link to="/">My Enrolled Classes</Link></li>
                             </>
+                        )
                     }
 
 

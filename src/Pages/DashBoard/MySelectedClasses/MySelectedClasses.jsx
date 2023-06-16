@@ -1,6 +1,7 @@
 import React from 'react';
 import useClass from '../../../hooks/useClass';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const MySelectedClasses = () => {
     const [selectedClass, refetch] = useClass()
@@ -40,7 +41,7 @@ const MySelectedClasses = () => {
             <div className='uppercase font-semibold h-[60px] flex justify-evenly items-center '>
                 <h3 className='text-3xl'>Total items:{selectedClass.length}</h3>
                 <h2 className='text-3xl'>Total price:${total.toFixed(2)}</h2>
-                <button className='btn btn-warning btn-sm'>Pay</button>
+                {/* <button className='btn btn-warning btn-sm'> <Link to="/dashboard/payment">Pay</Link></button> */}
             </div>
 
             <div className="overflow-x-auto">
@@ -56,6 +57,7 @@ const MySelectedClasses = () => {
                             <th>Food</th>
                             <th>Item name</th>
                             <th>Price</th>
+                            <th>Payment</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -68,14 +70,17 @@ const MySelectedClasses = () => {
                                 <td>
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
-                                            <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                            <img src={item.image} alt="Avatar " />
                                         </div>
                                     </div>
                                 </td>
                                 <td>
                                     {item.name}
                                 </td>
-                                <td className='text-end'>${item.price}</td>
+
+                                <td className='text-start'>${item.price}</td>
+                                <td className=' btn btn-warning btn-lg mx-auto '><Link to={`/dashboard/payment/${item.price}/${item.name}/${item._id}`}> Pay</Link></td>
+
                                 <th>
                                     <button onClick={() => handleDelete(item)} className="btn btn-ghost btn-lg bg-red-600">D</button>
                                 </th>

@@ -7,7 +7,7 @@ import useAuth from './useAuth';
 const useClass = () => {
     const { user } = useAuth();
 
-    const token = localStorage.getItem('access-token')
+    // const token = localStorage.getItem('access-token')
     const [axiosSecure] = useSecureAxious();
 
     const { refetch, data: selectedClass = [] } = useQuery({
@@ -16,8 +16,8 @@ const useClass = () => {
 
         queryFn: async () => {
 
-            const response = await axiosSecure(`/selectedClass?email=${user.email}`)
-            return response.json()
+            const response = await axiosSecure(`/users/selectedClass?email=${user?.email}`)
+            return response.data;
         }
     })
     return [selectedClass, refetch]

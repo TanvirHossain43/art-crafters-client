@@ -11,6 +11,7 @@ import MySelectedClasses from "../Pages/DashBoard/MySelectedClasses/MySelectedCl
 import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
 import AddClass from "../Pages/DashBoard/Instructor/AddClass/AddClass";
 import MyClasses from "../Pages/DashBoard/Instructor/MyClasses/MyClasses";
+import Payment from "../Pages/DashBoard/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
             {
                 path:'myclasses',
                 element:<MyClasses></MyClasses>
+            },
+            {
+                path:'payment/:price/:name/:id',
+                element:<Payment></Payment>
             }
         ]
 

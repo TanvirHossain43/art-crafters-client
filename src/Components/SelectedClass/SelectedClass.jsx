@@ -2,12 +2,14 @@ import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
+import useClass from '../../hooks/useClass';
 
-const SelectedClass = ({classItem}) => {
+const SelectedClass = ({ classItem }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const {_id,price,image,name,instructor,availableSeats,students}=classItem;
+    const [, refetch] = useClass();
+    const { _id, price, image, name, instructor, availableSeats, students } = classItem;
     console.log(classItem)
 
     const handleSelectClass = (id) => {
@@ -15,21 +17,13 @@ const SelectedClass = ({classItem}) => {
             alert('You have to log in first');
             return;
         }
-        // const classItem = classes.find((item) => item._id === id)
-        // if (!classItem) {
-        //     alert('class not found')
-        //     return;
-        // }
-        // if (classItem.availableSeats === 0) {
-        //     alert('no available seats')
-        //     return
-        // }
+        
 
-        if (user && user.email) {
-            const addedClass = { selectClass:_id, name, image, price, email: user.email }
-            console.log(addedClass)
+        if (user && user?.email) {
+            const addedClass = { selectClass: _id, name, image, price, email: user.email }
+            // console.log(addedClass)
 
-            fetch('http://localhost:5000/selectedClass', {
+            fetch('http://localhost:5000/users/selectedClass', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -39,7 +33,7 @@ const SelectedClass = ({classItem}) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
-                        // refetch();// refetch cart to the number of added item
+                        refetch();// refetch cart to the number of added item
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',

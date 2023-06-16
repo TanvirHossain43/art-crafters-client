@@ -48,7 +48,7 @@ const AddClass = () => {
 
     }
     return (
-        <form onSubmit={handleAddClass} className="form-control w-full lg:w-1/2 md:w-1/2 mx-auto mt-10 bg-gray-400 p-6 rounded-xl">
+        <form onSubmit={handleAddClass} className="form-control w-full lg:w-1/2 md:w-1/2 mx-auto mt-10 bg-gray-400 p-6 rounded-xl h-screen">
 
         <label className="label">
             <span className="label-text text-lg font-semibold">Class name</span>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useSecureAxious from '../../../hooks/useSecureAxious';
 import useAuth from '../../../hooks/useAuth';
 import './Payment.css'
+import useClass from '../../../hooks/useClass';
 
 
 const CheckOutForm = ({ price,name,id}) => {
@@ -15,6 +16,7 @@ const CheckOutForm = ({ price,name,id}) => {
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
     console.log(id)
+    const [selectedClass]=useClass()
    
 
     useEffect(() => {
@@ -88,7 +90,7 @@ const CheckOutForm = ({ price,name,id}) => {
             .then(res=>{
                 console.log(res.data)
                 if(res.data.insertedId){
-                    // 
+                   
                 }
             })
 

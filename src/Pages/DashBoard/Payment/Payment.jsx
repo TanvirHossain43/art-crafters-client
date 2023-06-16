@@ -10,7 +10,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK)
 const Payment = () => {
 
     const { price,name,id } = useParams();
-    console.log(price);
+   
     return (
         <div className='w-full'>
             <h2>Payment proceed</h2>

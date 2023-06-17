@@ -4,17 +4,21 @@ import useSecureAxious from './useSecureAxious';
 import { useQuery } from 'react-query';
 
 const useInstructor = () => {
-    const { user } = useAuth()
-    const [axiosSecure] = useSecureAxious()
-    const { data: isInstructor,isLoading:isInstructorLoading } = useQuery({
-        queryKey: ['isInstructor', user?.email],
-        queryFn: async () => {
-            const response = await axiosSecure.get(`/users/instructor/${user?.email}`)
-            console.log('instructors response', response)
-            return response.data.instructor;
+    const { user } = useAuth();
+    const [axiosSecure] = useSecureAxious();
+
+    const { data: isInstructor, isLoading: isInstructorLoading } = useQuery(
+        ['isInstructor', user?.email],
+        async () => {
+            if (user?.email) {
+                const response = await axiosSecure.get(`/users/instructor/${user.email}`);
+                return response.data.instructor;
+            }
+            return false;
         }
-    })
-    return [isInstructor,isInstructorLoading]
+    );
+
+    return [isInstructor, isInstructorLoading];
 };
 
 export default useInstructor;

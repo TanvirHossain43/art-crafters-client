@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { FcGoogle } from 'react-icons/fc';
+
 
 const SocialLogin = () => {
 
@@ -31,11 +33,11 @@ const SocialLogin = () => {
             .catch(error => console.log(error))
     }
     return (
-        <div>
+        <div className='w-full'>
             <div className='divider'></div>
-            <div className='w-full text-center my-4'>
-                <button onClick={handleSignIn} className="btn btn-circle">
-                    G
+            <div className=' text-center my-4 '>
+                <button onClick={handleSignIn} className="btn btn-circle w-full ">
+                    <FcGoogle  className='text-3xl'/> Login with Google
                 </button>
             </div>
 

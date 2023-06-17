@@ -5,9 +5,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import SelectedClass from '../../Components/SelectedClass/SelectedClass';
 
 const Classes = () => {
-    
+
     const [classes, setClasses] = useState([]);
-    
+
 
     useEffect(() => {
         fetch('http://localhost:5000/classes')
@@ -17,12 +17,17 @@ const Classes = () => {
             });
     }, []);
 
-    
+
 
     return (
-        <div className='pt-24 mb-10'>
+        <div className='pt-28 mb-10'>
             <div className='grid md:grid-cols-2 w-full justify-items-center gap-y-6'>
-            {classes.map((classItem) => <SelectedClass key={classItem._id} classItem={classItem}></SelectedClass>)}
+                {classes.map((classItem) => {
+                    if (classItem.status === 'approved') {
+                        return <SelectedClass key={classItem._id} classItem={classItem} />;
+                    }
+                    return null;
+                })}
 
             </div>
         </div>

@@ -5,8 +5,10 @@ import Swal from 'sweetalert2';
 import useClass from '../../hooks/useClass';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-const SelectedClass = ({ classItem }) => {
+const SelectedClass = ({ classItem, classes }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -37,11 +39,11 @@ const SelectedClass = ({ classItem }) => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.insertedId) {
-                        refetch();// refetch cart to the number of added item
+                        refetch();
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Food added on the cart',
+                            title: 'Class added on the cart',
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -82,7 +84,7 @@ const SelectedClass = ({ classItem }) => {
                     <button
                         onClick={() => handleSelectClass(_id)}
                         className='btn btn-primary'
-                        disabled={!user || classItem.availableSeats === 0 || isAdmin || isInstructor}
+                        disabled={classItem.availableSeats === 0 || isAdmin || isInstructor}
                     >
                         Add class
                     </button>

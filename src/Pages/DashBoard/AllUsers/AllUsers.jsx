@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 const AllUsers = () => {
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('http://localhost:5000/users');
+        const res = await fetch('https://art-crafters-server.vercel.app/users');
         return res.json();
     });
 
@@ -11,7 +11,7 @@ const AllUsers = () => {
         const newRole = event.target.value;
 
         try {
-            const response = await fetch(`http://localhost:5000/users/admin/${userId}`, {
+            const response = await fetch(`https://art-crafters-server.vercel.app/users/admin/${userId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,10 +31,11 @@ const AllUsers = () => {
     };
 
     return (
-        <div>
+        <div className='w-full h-full pt-10 '>
+            <h2 className='text-3xl text-center mb-6'>Manage Users</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
-                    <thead>
+                    <thead className='bg-black text-white text-xl'>
                         <tr>
                             <th>#</th>
                             <th>Name</th>

@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 import { ThemeContext } from './ThemeContext/ThemeProvider';
+import { BsFillMoonFill } from 'react-icons/bs';
+
 
 const NavBar = () => {
     const [activeLink, setActiveLink] = useState('')
@@ -9,16 +11,16 @@ const NavBar = () => {
     const { user, logOut } = useContext(AuthContext)
     const { theme, toggleTheme } = useContext(ThemeContext);
 
-  const themeStyles = {
-    dark: {
-      backgroundColor: 'black',
-      color: 'white',
-    },
-    light: {
-      backgroundColor: 'white',
-      color: 'black',
-    },
-  };
+    const themeStyles = {
+        dark: {
+            backgroundColor: 'black',
+            color: 'white',
+        },
+        light: {
+            backgroundColor: 'white',
+            color: 'black',
+        },
+    };
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -44,7 +46,7 @@ const NavBar = () => {
                 Home
             </Link>
         </li>
-        
+
         <li className='text-lg font-semibold ml-2'>
             <Link to="/instructors" className={` ${activeLink === 'instructors' ? 'text-blue-800 text-xl ' : ''
                 }`}
@@ -57,17 +59,17 @@ const NavBar = () => {
                 onClick={() => handleClick('classes')}>
                 Classes</Link>
         </li>
-     {
-        user? <>
-          <li className='text-lg font-semibold ml-2'>
-        <Link to="/dashboard" className={` ${activeLink === 'dashboard' ? 'text-blue-800 text-xl ' : ''
-            }`}
-            onClick={() => handleClick('dashboard')}>
-            DashBoard</Link>
-            </li>
-        </>:<></>
-    
-     }
+        {
+            user ? <>
+                <li className='text-lg font-semibold ml-2'>
+                    <Link to="/dashboard" className={` ${activeLink === 'dashboard' ? 'text-blue-800 text-xl ' : ''
+                        }`}
+                        onClick={() => handleClick('dashboard')}>
+                        DashBoard</Link>
+                </li>
+            </> : <></>
+
+        }
 
     </>
 
@@ -94,11 +96,12 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className=" navbar-end">
+                <button className='text-3xl mr-4' onClick={toggleTheme}><BsFillMoonFill/></button>
                 {
                     user ?
                         <div className='flex items-center gap-x-3'>
                             <div>
-                            <button className='btn btn-outline mr-2' onClick={toggleTheme}>Toggle Theme</button>
+
                                 <button onClick={handleLogOut} className='btn btn-primary'>LogOut</button>
                             </div>
                             <div className="w-16">

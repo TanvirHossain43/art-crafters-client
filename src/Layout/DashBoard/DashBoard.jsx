@@ -3,9 +3,9 @@ import { Link, Outlet } from 'react-router-dom';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
 import { GrUserManager } from "react-icons/gr";
-import { MdManageAccounts,MdFlightClass } from "react-icons/md";
+import { MdManageAccounts, MdFlightClass } from "react-icons/md";
 import { SiAddthis } from "react-icons/si";
-import { AiOutlineCloudDownload,AiOutlineWallet,AiTwotoneHome } from "react-icons/ai";
+import { AiOutlineCloudDownload, AiOutlineWallet, AiTwotoneHome } from "react-icons/ai";
 import { BiSelectMultiple } from "react-icons/bi";
 import { FaHistory } from "react-icons/fa";
 
@@ -38,13 +38,15 @@ const DashBoard = () => {
                         ) : isInstructor ? (
                             <>
                                 <li><Link to="/dashboard/addclass"><SiAddthis />Add a Class</Link></li>
-                                <li><Link to="/dashboard/myclasses"><AiOutlineCloudDownload/>My Classes</Link></li>
+                                <li><Link to="/dashboard/myclasses"><AiOutlineCloudDownload />My Classes</Link></li>
                             </>
                         ) : (
                             <>
                                 <li ><Link to="/dashboard/myselectedclasses"><BiSelectMultiple />My Selected Classes</Link></li>
-                                <li><Link to="/"><AiOutlineWallet/>My Enrolled Classes</Link></li>
-                                <li><Link to="/dashboard/paymentHistory"><FaHistory/>Payment History</Link></li>
+
+                                <li><Link to="/dashboard/paymentHistory"><FaHistory />Payment History</Link></li>
+
+                                <li><Link to="/dashboard/enroolClasses"><AiOutlineWallet />My Enrolled Classes</Link></li>
                             </>
                         )
                     }
@@ -54,9 +56,9 @@ const DashBoard = () => {
 
 
                     <div className='divider'></div>
-                    <li><Link to="/"><AiTwotoneHome/>Home</Link></li>
-                    <li><Link to="/classes"><MdFlightClass/>Classes</Link></li>
-                    <li><Link to="/instructors"><GrUserManager className='text-white'/>Instructors</Link></li>
+                    <li><Link to="/"><AiTwotoneHome />Home</Link></li>
+                    <li><Link to="/classes"><MdFlightClass />Classes</Link></li>
+                    <li><Link to="/instructors"><GrUserManager className='text-white' />Instructors</Link></li>
                 </ul>
 
             </div>

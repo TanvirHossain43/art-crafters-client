@@ -20,7 +20,7 @@ const PopularClasses = () => {
   
     
     useEffect(() => {
-        axios.get('http://localhost:5000/classes/popular')
+        axios.get('https://art-crafters-server.vercel.app/classes/popular')
             .then(response => setPopularClasses(response.data))
             .catch(error => console.error('Error:', error));
     }, [])

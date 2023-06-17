@@ -4,9 +4,10 @@ import useSecureAxious from '../../../hooks/useSecureAxious';
 import useAuth from '../../../hooks/useAuth';
 import './Payment.css'
 import useClass from '../../../hooks/useClass';
+import Swal from 'sweetalert2';
 
 
-const CheckOutForm = ({ price,name,id}) => {
+const CheckOutForm = ({ price, name, id }) => {
     const stripe = useStripe()
     const elements = useElements()
     const { user } = useAuth()
@@ -16,8 +17,8 @@ const CheckOutForm = ({ price,name,id}) => {
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
     console.log(id)
-    const [selectedClass]=useClass()
-   
+    const [selectedClass] = useClass()
+
 
     useEffect(() => {
         axiosSecure
@@ -83,16 +84,26 @@ const CheckOutForm = ({ price,name,id}) => {
                 transactionId: paymentIntent.id,
                 price,
                 className: name,
-                date:new Date(),
-                classId :id 
-            }
-            axiosSecure.post('/payments',payment)
-            .then(res=>{
-                console.log(res.data)
-                if(res.data.insertedId){
-                   
-                }
-            })
+                date: new Date(),
+                classId: id,
+
+               
+              };
+              console.log(payment)
+              
+            axiosSecure.post('/payments', payment)
+                .then(res => {
+                    console.log(res.data)
+                    if (res.data.insertedClass.insertedId) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Payment successful',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
 
         }
     }

@@ -29,7 +29,7 @@ const SelectedClass = ({ classItem, classes }) => {
             const addedClass = { selectClass: _id, name, image, price, email: user.email }
             // console.log(addedClass)
 
-            fetch('http://localhost:5000/users/selectedClass', {
+            fetch('https://art-crafters-server.vercel.app/users/selectedClass', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

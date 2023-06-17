@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const MySelectedClasses = () => {
     const [selectedClass, refetch] = useClass()
-    // how does reduce work
+
     const total = selectedClass.reduce((sum, item) => item.price + sum, 0)
     const handleDelete = item => {
         Swal.fire({
@@ -18,7 +18,7 @@ const MySelectedClasses = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/selectedClass/${item._id}`, {
+                fetch(`https://art-crafters-server.vercel.app/selectedClass/${item._id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -37,9 +37,9 @@ const MySelectedClasses = () => {
 
     }
     return (
-        <div className='w-full'>
-            <div className='uppercase font-semibold h-[60px] flex justify-evenly items-center '>
-                <h3 className='text-3xl'>Total items:{selectedClass.length}</h3>
+        <div className='w-full h-full pt-20'>
+            <div className='uppercase font-semibold mb-4 flex justify-evenly items-center '>
+                <h3 className='text-3xl'>Total selected class:{selectedClass.length}</h3>
                 <h2 className='text-3xl'>Total price:${total.toFixed(2)}</h2>
                 {/* <button className='btn btn-warning btn-sm'> <Link to="/dashboard/payment">Pay</Link></button> */}
             </div>
@@ -79,10 +79,14 @@ const MySelectedClasses = () => {
                                 </td>
 
                                 <td className='text-start'>${item.price}</td>
-                                <td className=' btn btn-warning btn-lg mx-auto '><Link to={`/dashboard/payment/${item.price}/${item.name}/${item._id}`}> Pay</Link></td>
+                                <th className='  mx-auto '>
+                                    <button className='btn btn-warning btn-sm'>
+                                        <Link to={`/dashboard/payment/${item.price}/${item.name}/${item._id}`}> Pay</Link>
+                                    </button>
+                                </th>
 
                                 <th>
-                                    <button onClick={() => handleDelete(item)} className="btn btn-ghost btn-lg bg-red-600">D</button>
+                                    <button onClick={() => handleDelete(item)} className="btn rounded-full text-white btn-ghost btn-sm bg-red-600">X</button>
                                 </th>
                             </tr>
 

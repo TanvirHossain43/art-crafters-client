@@ -44,7 +44,7 @@ const AuthProviders = ({ children }) => {
             console.log('state changed', currentUser)
             // get and set token(jwt)
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                axios.post('https://art-crafters-server.vercel.app/jwt', { email: currentUser.email })
                     .then(data => {
                         console.log(data.data.token)
                         localStorage.setItem('access-token', data.data.token)

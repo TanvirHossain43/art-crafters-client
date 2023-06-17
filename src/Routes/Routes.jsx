@@ -14,6 +14,7 @@ import MyClasses from "../Pages/DashBoard/Instructor/MyClasses/MyClasses";
 import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/Payment/PaymentHistory";
 import ManageClasses from "../Pages/DashBoard/Admin/ManageClasses/ManageClasses";
+import MyEnroolClasses from "../Pages/DashBoard/MyEnroolClasses/MyEnroolClasses";
 
 export const router = createBrowserRouter([
     {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
             {
                 path:'manageClasses',
                 element:<ManageClasses></ManageClasses>
+            },
+            {
+                path:'enroolClasses',
+                element:<MyEnroolClasses></MyEnroolClasses>
             }
         ]
 

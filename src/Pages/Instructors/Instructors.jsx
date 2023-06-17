@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 const Instructors = () => {
     const [instructors, setInstructors] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:5000/instructors')
+        axios.get('https://art-crafters-server.vercel.app/instructors')
             .then(response => setInstructors(response.data))
             .catch(error => console.error('Error:', error));
     }, [])

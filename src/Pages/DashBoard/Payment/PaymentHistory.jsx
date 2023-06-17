@@ -19,15 +19,15 @@ const PaymentHistory = () => {
         }
     }, [axiosSecure, user]);
     return (
-        <div>
-            <h2>Payment History</h2>
+        <div className='h-full w-full pt-4'>
+            <h2 className='text-3xl text-center mb-6'>Payment History</h2>
             <ul>
 
             </ul>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}
-                    <thead>
+                    <thead className='bg-black text-white text-lg'>
                         <tr>
                             <th>
                                 <label>#</label>

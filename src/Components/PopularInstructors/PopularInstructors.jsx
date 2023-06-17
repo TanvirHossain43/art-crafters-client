@@ -18,7 +18,7 @@ const PopularInstructors = () => {
       },
     };
     useEffect(() => {
-        axios.get('http://localhost:5000/instructors/popular')
+        axios.get('https://art-crafters-server.vercel.app/instructors/popular')
             .then(response => setInstructors(response.data))
             .catch(error => console.error('Error:', error));
     }, [])

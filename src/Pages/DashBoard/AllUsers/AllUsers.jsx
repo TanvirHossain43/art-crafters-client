@@ -21,7 +21,7 @@ const AllUsers = () => {
 
             if (response.ok) {
                 console.log('Role updated');
-                refetch(); // Refresh the user data after updating the role
+                refetch(); 
             } else {
                 console.log('Error updating role');
             }

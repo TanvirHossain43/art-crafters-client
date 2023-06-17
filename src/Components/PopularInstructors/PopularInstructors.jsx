@@ -1,15 +1,29 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../Shared/ThemeContext/ThemeProvider';
 
 const PopularInstructors = () => {
     const [instructors, setInstructors] = useState([])
+    const { theme } = useContext(ThemeContext);
+
+    const themeStyles = {
+      dark: {
+        backgroundColor: 'black',
+        color: 'white',
+      },
+      light: {
+        backgroundColor: 'white',
+        color: 'black',
+      },
+    };
     useEffect(() => {
         axios.get('http://localhost:5000/instructors/popular')
             .then(response => setInstructors(response.data))
             .catch(error => console.error('Error:', error));
     }, [])
     return (
-        <div className='mt-20 mb-20'>
+        <div className='pt-20 pb-20 ' style={themeStyles[theme]}>
 
             <div className='w-2/4 mb-10 mx-auto'>
                 <hr className='border-dotted border-2 border-indigo-600 ' />

@@ -1,11 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
+import { ThemeContext } from './ThemeContext/ThemeProvider';
 
 const NavBar = () => {
     const [activeLink, setActiveLink] = useState('')
     const [isOpen, setIsOpen] = useState(false);
     const { user, logOut } = useContext(AuthContext)
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
+  const themeStyles = {
+    dark: {
+      backgroundColor: 'black',
+      color: 'white',
+    },
+    light: {
+      backgroundColor: 'white',
+      color: 'black',
+    },
+  };
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -44,19 +57,24 @@ const NavBar = () => {
                 onClick={() => handleClick('classes')}>
                 Classes</Link>
         </li>
-        <li className='text-lg font-semibold ml-2'>
-            <Link to="/dashboard" className={` ${activeLink === 'dashboard' ? 'text-blue-800 text-xl ' : ''
-                }`}
-                onClick={() => handleClick('dashboard')}>
-                DashBoard</Link>
-        </li>
+     {
+        user? <>
+          <li className='text-lg font-semibold ml-2'>
+        <Link to="/dashboard" className={` ${activeLink === 'dashboard' ? 'text-blue-800 text-xl ' : ''
+            }`}
+            onClick={() => handleClick('dashboard')}>
+            DashBoard</Link>
+            </li>
+        </>:<></>
+    
+     }
 
     </>
 
 
     return (
 
-        <div className="navbar bg-opacity-40 bg-black text-white  rounded-lg mx-auto fixed z-10">
+        <div className="navbar bg-opacity-40 bg-black text-white  rounded-lg mx-auto fixed z-10 " style={themeStyles[theme]}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden" onClick={toggleMenu}>
@@ -80,6 +98,7 @@ const NavBar = () => {
                     user ?
                         <div className='flex items-center gap-x-3'>
                             <div>
+                            <button className='btn btn-outline mr-2' onClick={toggleTheme}>Toggle Theme</button>
                                 <button onClick={handleLogOut} className='btn btn-primary'>LogOut</button>
                             </div>
                             <div className="w-16">

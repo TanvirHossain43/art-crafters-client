@@ -22,15 +22,38 @@ const PaymentHistory = () => {
         <div>
             <h2>Payment History</h2>
             <ul>
-                {paymentHistory.map((payment) => (
-                    <li key={payment._id}>
-                        <p>Transaction ID: {payment.transactionId}</p>
-                        <p>Price: {payment.price}</p>
-                        <p>Class Name: {payment.className}</p>
-                        <p>Date: {payment.date}</p>
-                    </li>
-                ))}
+
             </ul>
+            <div className="overflow-x-auto">
+                <table className="table table-zebra">
+                    {/* head */}
+                    <thead>
+                        <tr>
+                            <th>
+                                <label>#</label>
+                            </th>
+                            <th>Class name</th>
+                            <th>User Email</th>
+                            <th>Transaction Id</th>
+                            <th>Date & time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {paymentHistory.map((payment, index) => (
+
+                            <tr key={payment._id}>
+                                <th>{index + 1}</th>
+                                <th> {payment.className}</th>
+                                <td>{payment.email}</td>
+                                <td>{payment.transactionId}</td>
+                                <td>{payment.date}</td>
+                            </tr>
+                        ))}
+
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

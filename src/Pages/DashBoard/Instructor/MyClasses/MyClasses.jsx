@@ -11,7 +11,7 @@ const MyClasses = () => {
     }, [])
     return (
         <div>
-            <h3>Class Added:{classes.length}</h3>
+            <h3 className='text-3xl mb-4'>Your all Added Class is here:{classes.length}</h3>
             <div className='grid md:grid-cols-1 w-full justify-items-center gap-y-6'>
 
                 {
@@ -23,7 +23,7 @@ const MyClasses = () => {
                             <div className='card-body'>
                                 <h2 className='card-title'>{classItem.name}</h2>
                                 <p>Instructor: {classItem.instructor}</p>
-                                <p>Price: {classItem.price}</p>
+                                <p>Price: {classItem.price}$</p>
                                 <p>Students: {classItem.students}</p>
                                 <p>Available Seats: {classItem.availableSeats}</p>
                                 <p>Status: {classItem?.status}</p>

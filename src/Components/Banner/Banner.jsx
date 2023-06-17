@@ -3,8 +3,9 @@ import AutoplaySlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 
 
-const Banner = () => {
 
+const Banner = () => {
+  
     return (
         <AutoplaySlider
             className="opacity-40 h-screen"
@@ -12,6 +13,7 @@ const Banner = () => {
             cancelOnInteraction={false}
             interval={3000}
             bullets={false}
+            
 
         >
             <div data-src="https://i.ibb.co/Pgx7vcF/2.jpg" className='absolute' >

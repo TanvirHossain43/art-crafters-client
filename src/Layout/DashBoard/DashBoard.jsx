@@ -25,7 +25,7 @@ const DashBoard = () => {
                     {
                         isAdmin ? (
                             <>
-                                <li><Link to="/">Manage Classes</Link></li>
+                                <li><Link to="/dashboard/manageClasses">Manage Classes</Link></li>
                                 <li><Link to="/dashboard/allusers">Manage Users</Link></li>
                             </>
                         ) : isInstructor ? (

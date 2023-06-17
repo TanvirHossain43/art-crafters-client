@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
 import useClass from '../../hooks/useClass';
+import useAdmin from '../../hooks/useAdmin';
+import useInstructor from '../../hooks/useInstructor';
 
 const SelectedClass = ({ classItem }) => {
     const { user } = useContext(AuthContext);
@@ -11,13 +13,15 @@ const SelectedClass = ({ classItem }) => {
     const [, refetch] = useClass();
     const { _id, price, image, name, instructor, availableSeats, students } = classItem;
     console.log(classItem)
+    const [isAdmin] = useAdmin()
+    const [isInstructor] = useInstructor()
 
     const handleSelectClass = (id) => {
         if (!user) {
             alert('You have to log in first');
             return;
         }
-        
+
 
         if (user && user?.email) {
             const addedClass = { selectClass: _id, name, image, price, email: user.email }
@@ -78,7 +82,7 @@ const SelectedClass = ({ classItem }) => {
                     <button
                         onClick={() => handleSelectClass(_id)}
                         className='btn btn-primary'
-                        disabled={!user || classItem.availableSeats === 0}
+                        disabled={!user || classItem.availableSeats === 0 || isAdmin || isInstructor}
                     >
                         Add class
                     </button>

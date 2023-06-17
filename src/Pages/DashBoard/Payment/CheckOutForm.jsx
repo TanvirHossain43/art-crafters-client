@@ -16,8 +16,8 @@ const CheckOutForm = ({ price, name, id }) => {
     const [clientSecret, setClientSecret] = useState('')
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
-    console.log(id)
-    const [selectedClass] = useClass()
+
+
 
 
     useEffect(() => {
@@ -87,10 +87,10 @@ const CheckOutForm = ({ price, name, id }) => {
                 date: new Date(),
                 classId: id,
 
-               
-              };
-              console.log(payment)
-              
+
+            };
+            console.log(payment)
+
             axiosSecure.post('/payments', payment)
                 .then(res => {
                     console.log(res.data)
@@ -102,6 +102,23 @@ const CheckOutForm = ({ price, name, id }) => {
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        axiosSecure
+                            .patch(`/classes/${id}`, { incrementStudents: true })
+                            .then((patchRes) => {
+                                console.log(patchRes.data);
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Payment successful',
+                                    showConfirmButton: false,
+                                    timer: 1500,
+                                });
+                            })
+                            .catch((patchError) => {
+                                console.error('Error updating available seats:', patchError);
+                                
+                            });
+
                     }
                 })
 

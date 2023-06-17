@@ -15,6 +15,7 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/Payment/PaymentHistory";
 import ManageClasses from "../Pages/DashBoard/Admin/ManageClasses/ManageClasses";
 import MyEnroolClasses from "../Pages/DashBoard/MyEnroolClasses/MyEnroolClasses";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -50,7 +51,7 @@ export const router = createBrowserRouter([
     {
 
         path: 'dashboard',
-        element:<DashBoard></DashBoard> ,
+        element:<PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
         children: [
             {
                 path: 'myselectedclasses',
@@ -69,8 +70,9 @@ export const router = createBrowserRouter([
                 element:<MyClasses></MyClasses>
             },
             {
-                path:'payment/:price/:name/:id',
-                element:<Payment></Payment>
+                path:'payment/:id',
+                element:<Payment></Payment>,
+                loader:({params})=>fetch(`https://art-crafters-server.vercel.app/selectedClass/${params.id}`)
             },
             {
                 path:'paymentHistory',

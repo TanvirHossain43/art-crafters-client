@@ -10,17 +10,6 @@ const ManageClasses = () => {
         axios.get('https://art-crafters-server.vercel.app/classes').then((response) => response.data)
     );
 
-    // useEffect(() => {
-    //     axios
-    //         .get('http://localhost:5000/classes')
-    //         .then((response) => {
-    //             setClasses(response.data);
-
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching classes:', error);
-    //         });
-    // }, []);
 
 
     const handleClassUpdate = async (id, status) => {

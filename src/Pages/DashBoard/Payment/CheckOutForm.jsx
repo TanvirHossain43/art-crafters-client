@@ -2,12 +2,10 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import useSecureAxious from '../../../hooks/useSecureAxious';
 import useAuth from '../../../hooks/useAuth';
-import './Payment.css'
-import useClass from '../../../hooks/useClass';
 import Swal from 'sweetalert2';
 
 
-const CheckOutForm = ({ price, name, id }) => {
+const CheckOutForm = ({ selectedClass }) => {
     const stripe = useStripe()
     const elements = useElements()
     const { user } = useAuth()
@@ -16,6 +14,7 @@ const CheckOutForm = ({ price, name, id }) => {
     const [clientSecret, setClientSecret] = useState('')
     const [processing, setProcessing] = useState(false)
     const [transactionId, setTransactionId] = useState('')
+    const { price, name, id } = selectedClass
 
 
 
@@ -86,6 +85,7 @@ const CheckOutForm = ({ price, name, id }) => {
                 className: name,
                 date: new Date(),
                 classId: id,
+                class: selectedClass,
 
 
             };
@@ -103,7 +103,7 @@ const CheckOutForm = ({ price, name, id }) => {
                             timer: 1500
                         })
                         axiosSecure
-                            .patch(`/classes/${id}`, { incrementStudents: true })
+                            .patch(`/classes/${selectedClass.selectClass}`, { incrementStudents: true })
                             .then((patchRes) => {
                                 console.log(patchRes.data);
                                 Swal.fire({
@@ -116,7 +116,7 @@ const CheckOutForm = ({ price, name, id }) => {
                             })
                             .catch((patchError) => {
                                 console.error('Error updating available seats:', patchError);
-                                
+
                             });
 
                     }
